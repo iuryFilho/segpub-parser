@@ -1,0 +1,13 @@
+tipo: furto
+data: 12/03/25 10:20
+local: Rua Beija-flor
+relato: Roubo de 2 celulares
+envolvidos: João, Maria e Pedro
+objetos: 2 Celulares
+
+tipo: acidente
+data: 39/13/25
+local: Rua Bem-te-vi
+relato: Acidente de carro. Carro bateu em moto.
+envolvidos: Sérgio, Ana Clara.
+objetos: carro ; moto ; cachaça
