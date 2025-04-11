@@ -1,6 +1,5 @@
 import re
 
-# objetos: carro ; moto ; cachaça
 
 LABELS = {
     "TIPO_LABEL",
@@ -41,10 +40,10 @@ class Lexer:
             self.current_pos = match.end()
 
     def lookahead(self):
+        self.skip_ws()
+
         if self.current_pos >= len(self.input_text):
             return None
-
-        self.skip_ws()
 
         for token_type, regex in TOKEN_REGEX.items():
             pattern = re.compile(regex)
@@ -55,14 +54,14 @@ class Lexer:
         raise SyntaxError("Nenhum token encontrado")
 
     def match(self, expected_type):
+        self.skip_ws()
+
         if self.current_pos >= len(self.input_text):
             self.current_token = None
             self.current_token_type = expected_type
             raise SyntaxError(
                 f"Token do tipo {expected_type} esperado após fim do arquivo"
             )
-
-        self.skip_ws()
 
         regex = TOKEN_REGEX[expected_type]
         pattern = re.compile(regex)
@@ -148,9 +147,9 @@ class Parser:
             break
         while True:
             try:
-                self.lexer.match("PALAVRA")
+                token = self.lexer.match("PALAVRA")
             except SyntaxError as e:
-                if self.lexer.current_token is None:
+                if self.lexer.current_token is None and token not in [",", ";"]:
                     break
                 else:
                     raise e
